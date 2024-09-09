@@ -13,9 +13,10 @@ usage(){
 	echo "  -2, --delete-user       Want To Delete A User"
 	echo "  -3, --create-password   Want To Change User Password"
 	echo "  -4, --add-group         Want To Add A New Group"
-	echo "  -5, --list-users        Want To List All Existing User"
-	echo "  -6, --backup-directory  Want To Backup A Specified Directory"
-	echo "  -7, --help              Want To Help"
+	echo "  -5, --list-user         Want To List All Existing Users"
+	echo "  -6, --list-group        Want To List All Existing Groups"
+	echo "  -7, --backup-directory  Want To Backup A Specified Directory"
+	echo "  -8, --help              Want To Help"
 }
 
 add_user(){
@@ -63,7 +64,12 @@ add_group(){
 list_user(){
 	cat /etc/passwd | awk -F: '{print $1}'
 
-}	
+}
+
+list_group(){
+	cat /etc/group | awk -F: '{print $1}'
+}
+
 
 backup(){
 	read -p "Enter The Directory To backup: " directory
@@ -89,10 +95,13 @@ for option in "$@"; do
 		-5| --list-user)
 			list_user
 			;;
-		-6| --backup-directory)
+		-6| --list-group)
+			list_group
+			;;
+		-7| --backup-directory)
 			backup
 			;;
-		-7| --help)
+		-8| --help)
 			usage
 			;;
 		*)
